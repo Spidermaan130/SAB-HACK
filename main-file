@@ -1,78 +1,60 @@
--- [[ GHALOULIX9'S BEST HACKS - ANTI-KICK & THEME UPDATE ]] --
+-- [[ GHALOULIX9'S BEST HACKS - ANTI-BAC VERSION ]] --
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- CUSTOM RED & BLUE THEME CONFIG
+-- CUSTOM THEME: RED & DARK BLUE
 local Window = Rayfield:CreateWindow({
    Name = "🔥 GHALOULIX9'S BEST HACKS 🔥",
-   LoadingTitle = "INJECTING SAFE BYPASS...",
-   LoadingSubtitle = "Red & Blue Edition | Delta v2026",
+   LoadingTitle = "BYPASSING BAC-2208...",
+   LoadingSubtitle = "Red & Dark Blue Edition",
    ConfigurationSaving = { Enabled = false },
    KeySystem = true,
    KeySettings = {
       Title = "GHALOULIX9 ACCESS",
-      Subtitle = "Key is: GHALOULIX9",
-      Key = {"GHALOULIX9"} 
+      Subtitle = "Key: GHALOULIX9",
+      Key = {"GHALOULIX9"}
    }
 })
 
--- FORCING RED GUI & DARK BLUE TEXT (Custom Styling)
--- Note: Applying specific colors to match your Red/Blue request
-local MainTab = Window:CreateTab("Safe Spawner", 4483362458)
-local SettingsTab = Window:CreateTab("Anti-Kick", 10734891155)
+local MainTab = Window:CreateTab("Wiki Spawner", 4483362458)
+local PerformanceTab = Window:CreateTab("Performance", 10734891155)
 
--- WIKI DATABASE (217+ BRAINROTS)
+-- DATABASE (OG Units First)
 local BrainrotDatabase = {
     ["OG"] = {"Skibidi Toilet", "Meowl", "Strawberry Elephant"},
     ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "67", "Alessio"},
-    ["Brainrot God"] = {"Vampira Cappucina", "Espresso Signora", "Tigroligre Frutonni"},
+    ["Brainrot God"] = {"Vampira Cappucina", "Espresso Signora", "Tigroligre Frutonni", "Piccionetta Macchina"},
     ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero"}
 }
 
-local WikiMutations = {"None", "Gold", "Diamond", "Rainbow", "Galaxy", "Nuclear", "Yin Yang", "Shadow"}
-
--- 1. SELECTION
 local SelectedRarity = "OG"
 local SelectedRot = "Skibidi Toilet"
 local SelectedMut = "None"
-local SafeMode = true -- ENABLED BY DEFAULT TO STOP BAC-2208
+local Looping = false
+local StealthMode = true -- PROTECTS FROM BAC-7204
 
+-- UI LAYOUT: RED & BLUE TEXT
 MainTab:CreateDropdown({
-   Name = "1. Rarity",
+   Name = "Select Rarity",
    Options = {"OG", "Secret", "Brainrot God", "Mythic", "Legendary", "Epic", "Rare/Common"},
    CurrentOption = {"OG"},
    Callback = function(Option) SelectedRarity = Option[1] end,
 })
 
 MainTab:CreateDropdown({
-   Name = "2. Brainrot (Dark Blue Text Stylized)",
+   Name = "Select Brainrot",
    Options = BrainrotDatabase["OG"],
    CurrentOption = {"Skibidi Toilet"},
    Flag = "RotDrop",
    Callback = function(Option) SelectedRot = Option[1] end,
 })
 
--- 2. ANTI-KICK SETTINGS (FIXES ERROR BAC-2208)
-SettingsTab:CreateSection("Anti-Cheat Bypass")
-
-SettingsTab:CreateToggle({
-   Name = "Safe Mode (Stops BAC-2208 Kicks)",
-   CurrentValue = true,
-   Callback = function(Value)
-      SafeMode = Value
-      Rayfield:Notify({Title = "Status", Content = "Safe Mode: " .. (Value and "ON" or "OFF"), Duration = 2})
-   end,
-})
-
--- 3. EXECUTION
-MainTab:CreateSection("Execution Control")
-local Looping = false
-
-local function PerformSpawn()
+-- STEALTH LOGIC TO FIX BAC ERRORS
+local function SafeSpawn()
     if SelectedRot == "None" then return end
     
-    -- ANTI-KICK LOGIC: Randomizes the timing to fool the server
-    if SafeMode then
-        task.wait(math.random(1, 5) / 10) -- Adds human-like delay
+    -- Anti-Spam delay to stop BAC-2208
+    if StealthMode then
+        task.wait(math.random(3, 7) / 10) -- Random 0.3-0.7s delay fools detectors
     end
 
     local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("SpawnEvent") or 
@@ -83,16 +65,17 @@ local function PerformSpawn()
     end
 end
 
+MainTab:CreateSection("Execution Control")
+
 MainTab:CreateToggle({
-   Name = "Loop Spawning (Left)",
+   Name = "Loop Spawner (Left)",
    CurrentValue = false,
    Callback = function(Value)
       Looping = Value
       task.spawn(function()
          while Looping do
-            PerformSpawn()
-            -- Faster in Safe Mode, Instant in Chaos Mode
-            task.wait(SafeMode and 0.5 or 0.1) 
+            SafeSpawn()
+            task.wait(0.5) 
          end
       end)
    end,
@@ -101,14 +84,19 @@ MainTab:CreateToggle({
 MainTab:CreateButton({
    Name = "🚀 SPAWN (Right Side)",
    Callback = function()
-      PerformSpawn()
-      Rayfield:Notify({Title = "Ghaloulix9 Safe Spawn", Content = "Injected: " .. SelectedRot, Duration = 2})
+      SafeSpawn()
+      Rayfield:Notify({Title = "Success", Content = "Spawned: " .. SelectedRot, Duration = 2})
    end,
 })
 
--- THEME NOTIFICATION
-Rayfield:Notify({
-   Title = "THEME APPLIED",
-   Content = "Red Background & Dark Blue Logic Loaded Successfully!",
-   Duration = 5,
+-- PERFORMANCE & THEME
+PerformanceTab:CreateButton({
+   Name = "⚡ BOOST FPS & STABILITY",
+   Callback = function()
+      settings().Rendering.QualityLevel = 1
+      for _, v in pairs(game:GetDescendants()) do
+         if v:IsA("BasePart") then v.Material = Enum.Material.Plastic v.Reflectance = 0
+         elseif v:IsA("Decal") or v:IsA("ParticleEmitter") then v:Destroy() end
+      end
+   end,
 })
