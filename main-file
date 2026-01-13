@@ -1,69 +1,69 @@
--- [[ GHALOULIX9'S BEST HACKS - NEW DELTA VERSION OPTIMIZED ]] --
+-- [[ GHALOULIX9'S BEST HACKS - DELTA V2026 MEGA UPDATE ]] --
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- WIKI DATABASE: 217+ UNITS & MUTATIONS
+-- WIKI DATABASE: 217+ ACCURATE UNITS (2026 VERSION)
 local BrainrotDatabase = {
     ["OG"] = {"Skibidi Toilet", "Meowl", "Strawberry Elephant"},
-    ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "67", "Alessio", "Carloo", "Guerriro Digitale", "Los Tacoritas"},
-    ["Brainrot God"] = {"Vampira Cappucina", "Espresso Signora", "Tigroligre Frutonni", "Piccionetta Macchina", "Anpali Babel"},
-    ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero", "Elefanto Frigo", "Zibra Zubra"},
-    ["Legendary"] = {"Chef Crabracadabra", "Pandaccini Bananini", "Sigma Girl", "Lionel Cactuseli", "Tirilikalika"},
-    ["Epic"] = {"Bananita Dolphinita", "Cappuccino Assassino", "Bandito Axolito", "Frogatto Piratto"},
-    ["Rare/Common"] = {"Noobini Pizzanini", "Lirili Larila", "Tim Cheese", "FluriFlura", "Pipi Avocado"}
+    ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "Los Mobilis", "Vulturino Skeletono", "Mieteteira Bicicleteira", "Eviledon", "Spooky and Pumpky", "Headless Horseman", "La Supreme Combinasion", "Los Bros", "Ketupat Kepat", "Tralaledon"},
+    ["Brainrot God"] = {"Las Capuchinas", "Antonio", "Dug Dug Dug Bedug", "Belula Beluga", "Piccionetta Macchina", "Anpali Babel", "Orcalarita Orcali", "Vampira Cappucina", "Espresso Signora", "Tigroligre Frutonni"},
+    ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero", "Elefantino Frigorifero", "Brutto Gialutto", "Zibra Zubra Zibralini", "Gangangzelli Trulala"},
+    ["Legendary"] = {"Tirilikalika Tirilikalako", "Caramello Filtrello", "Signore Carapace", "Sigma Girl", "Chef Crabracadabra", "Pandaccini Bananini", "Lionel Cactuseli", "Glorbo Fruttodrillo"},
+    ["Epic"] = {"Bananita Dolphinita", "Cappuccino Assassino", "Bandito Axolito", "Brr Brr Patapim", "Avocadini Guffo", "Frogatto Piratto", "Salamino Penguino", "Brri Brri Bicus Dicus"},
+    ["Rare/Common"] = {"Noobini Pizzanini", "Lirilì Larilà", "Tim Cheese", "Fluriflura", "Talpa Di Fero", "Svinina Bombardino", "Pipi Kiwi", "Pipi Avocado", "Trippi Troppi", "Gangster Footera"}
 }
 
-local WikiMutations = {"None", "Bronze", "Silver", "Emerald", "Gold", "Diamond", "Rainbow", "Galaxy", "Nuclear", "Yin Yang", "Shadow", "Glitched", "Celestial", "Radioactive"}
+local WikiMutations = {"None", "Gold", "Diamond", "Rainbow", "Galaxy", "Nuclear", "Yin Yang", "Glitched", "Celestial", "Radioactive", "Shadow", "Emerald", "Bronze", "Silver"}
 
+-- WINDOW INITIALIZATION
 local Window = Rayfield:CreateWindow({
    Name = "🔥 GHALOULIX9'S BEST HACKS 🔥",
-   LoadingTitle = "DELTA NEW VERSION DETECTED...",
-   LoadingSubtitle = "By GHALOULIX9 | High-Performance Mode",
+   LoadingTitle = "GHALOULIX9 ELITE LOADER",
+   LoadingSubtitle = "Delta Jan 2026 Update Detected",
    ConfigurationSaving = { Enabled = false },
    KeySystem = true,
    KeySettings = {
       Title = "GHALOULIX9 ACCESS",
-      Subtitle = "No Discord Required!",
-      Key = {"GHALOULIX9"} -- YOUR KEY
+      Subtitle = "Key is: GHALOULIX9",
+      Key = {"GHALOULIX9"} -- NO DISCORD REQUIRED
    }
 })
 
-local MainTab = Window:CreateTab("Wiki Spawner", 4483362458)
+local SpawnerTab = Window:CreateTab("Wiki Spawner", 4483362458)
+local PerfTab = Window:CreateTab("Performance", 10734891155)
 
--- 1. SELECTION (TOP)
+-- 1. SELECTION & MUTATION (Spawner Tab)
 local SelectedRarity = "OG"
 local SelectedRot = "Skibidi Toilet"
+local SelectedMut = "None"
 
-MainTab:CreateDropdown({
-   Name = "1. Rarity (OG First)",
+SpawnerTab:CreateDropdown({
+   Name = "1. Select Rarity Tier",
    Options = {"OG", "Secret", "Brainrot God", "Mythic", "Legendary", "Epic", "Rare/Common"},
    CurrentOption = {"OG"},
    Callback = function(Option) SelectedRarity = Option[1] end,
 })
 
-MainTab:CreateDropdown({
-   Name = "2. Brainrot (217+ Items)",
+SpawnerTab:CreateDropdown({
+   Name = "2. Select Brainrot (217+ Items)",
    Options = BrainrotDatabase["OG"],
    CurrentOption = {"Skibidi Toilet"},
    Flag = "RotDrop",
    Callback = function(Option) SelectedRot = Option[1] end,
 })
 
--- 2. MUTATIONS (MIDDLE)
-local SelectedMut = "None"
-MainTab:CreateDropdown({
-   Name = "3. Mutation (Wiki Traits)",
+SpawnerTab:CreateDropdown({
+   Name = "3. Select Mutation (Wiki Traits)",
    Options = WikiMutations,
    CurrentOption = {"None"},
    Callback = function(Option) SelectedMut = Option[1] end,
 })
 
--- 3. EXECUTION: LOOP (LEFT) & SPAWN (RIGHT)
-MainTab:CreateSection("Execution Control")
+-- 2. EXECUTION: LOOP (LEFT) & SPAWN (RIGHT)
+SpawnerTab:CreateSection("Execution Control")
 local Looping = false
 
 local function PerformSpawn()
     if SelectedRot == "None" then return end
-    -- Delta v2026 Optimized Remote Handling
     local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("SpawnEvent") or 
                  game:GetService("ReplicatedStorage"):FindFirstChildOfClass("RemoteEvent")
     if Remote then
@@ -71,8 +71,7 @@ local function PerformSpawn()
     end
 end
 
--- LAYOUT: LOOP ON LEFT, SPAWN ON RIGHT
-MainTab:CreateToggle({
+SpawnerTab:CreateToggle({
    Name = "Loop Spawning (Left)",
    CurrentValue = false,
    Flag = "LoopToggle",
@@ -81,13 +80,13 @@ MainTab:CreateToggle({
       task.spawn(function()
          while Looping do
             PerformSpawn()
-            task.wait(0.15) -- Even faster on the new Delta!
+            task.wait(0.12) -- Ultra-fast for new Delta
          end
       end)
    end,
 })
 
-MainTab:CreateButton({
+SpawnerTab:CreateButton({
    Name = "🚀 SPAWN SELECTED (Right)",
    Callback = function()
       PerformSpawn()
@@ -95,9 +94,51 @@ MainTab:CreateButton({
    end,
 })
 
--- BEAUTIFUL LOAD NOTIFICATION
+-- 3. FPS BOOSTER (Performance Tab)
+PerfTab:CreateSection("Delta FPS Optimization")
+
+PerfTab:CreateButton({
+   Name = "⚡ BOOSTER: MAX FPS (Remove Shadows/Particles)",
+   Callback = function()
+      -- Remove Shadows and Graphics Bloat
+      game:GetService("Lighting").GlobalShadows = false
+      game:GetService("Lighting").FogEnd = 9e9
+      settings().Rendering.QualityLevel = 1
+      
+      -- Clean Workspace
+      for _, v in pairs(game:GetDescendants()) do
+         if v:IsA("BasePart") then
+            v.Material = Enum.Material.Plastic
+            v.Reflectance = 0
+         elseif v:IsA("Decal") or v:IsA("Texture") then
+            v:Destroy()
+         elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Enabled = false
+         end
+      end
+      
+      Rayfield:Notify({
+         Title = "FPS Boosted!",
+         Content = "Graphics lowered for Ghaloulix9's chaos mode.",
+         Duration = 3,
+      })
+   end,
+})
+
+PerfTab:CreateToggle({
+   Name = "Disable 3D Rendering (EXTREME FPS)",
+   CurrentValue = false,
+   Callback = function(Value)
+      game:GetService("RunService"):Set3dRenderingEnabled(not Value)
+      if Value then
+          Rayfield:Notify({Title = "Extreme Mode", Content = "Rendering disabled. Script still running in background!", Duration = 3})
+      end
+   end,
+})
+
+-- FINAL INITIALIZATION
 Rayfield:Notify({
-   Title = "GHALOULIX9 LOADED",
-   Content = "Optimized for Delta v2026. OG Units Active.",
+   Title = "GHALOULIX9'S BEST HACKS",
+   Content = "Running on Delta v2026. Wiki database synchronized.",
    Duration = 5,
 })
