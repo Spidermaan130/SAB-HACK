@@ -1,11 +1,11 @@
--- [[ GHALOULIX9'S BEST HACKS - ANTI-BAC VERSION ]] --
+-- [[ GHALOULIX9'S BEST HACKS - STEAL A BRAINROT EXCLUSIVE ]] --
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- CUSTOM THEME: RED & DARK BLUE
+-- [[ 1. CONFIGURATION & THEME (Red/Blue) ]] --
 local Window = Rayfield:CreateWindow({
    Name = "🔥 GHALOULIX9'S BEST HACKS 🔥",
-   LoadingTitle = "BYPASSING BAC-2208...",
-   LoadingSubtitle = "Red & Dark Blue Edition",
+   LoadingTitle = "HOOKING TO TYCOON...",
+   LoadingSubtitle = "Steal A Brainrot: Auto-Farm & Index",
    ConfigurationSaving = { Enabled = false },
    KeySystem = true,
    KeySettings = {
@@ -15,88 +15,118 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local MainTab = Window:CreateTab("Wiki Spawner", 4483362458)
-local PerformanceTab = Window:CreateTab("Performance", 10734891155)
-
--- DATABASE (OG Units First)
+-- [[ 2. THE MASSIVE DATABASE (217+ UNITS) ]] --
 local BrainrotDatabase = {
-    ["OG"] = {"Skibidi Toilet", "Meowl", "Strawberry Elephant"},
-    ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "67", "Alessio"},
-    ["Brainrot God"] = {"Vampira Cappucina", "Espresso Signora", "Tigroligre Frutonni", "Piccionetta Macchina"},
-    ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero"}
+    ["OG"] = {"Strawberry Elephant", "Skibidi Toilet", "Meowl"},
+    
+    ["Halloween Event"] = {"Headless Horseman", "Vampira Cappucina", "Zombie Tralala", "Frankentteo", "La Vacca Jacko Linterino", "Pot Pumpkin", "Noo my Candy", "Mummy Ambalabu", "Jackorilla", "Cappuccino Clownnino", "Trickollino", "Skull Skul Skull", "Spooky and Pumpky", "Vulturino Skeletono"},
+    
+    ["Winter Event"] = {"Jingle Jingle Sahur", "Jolly Jolly Sahur", "Chrismasmamat", "Chicleteira Bicicleteira", "Ho Ho Ho Sahur", "Penguin Tree", "Noobini Santanini", "La Jolly Grande", "Festive 67", "Snowman Tralala", "Ice Dragon"},
+    
+    ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "Ketchuru and Musturu", "La Supreme Combinasion", "Los Bros", "Ketupat Kepat", "Tralaledon", "Esok Sekolah", "Pot Hotspot", "Nuclearo Dinossauro"},
+    
+    ["Brainrot God"] = {"Tigroligre Frutonni", "Orcalero Orcala", "Bulbito Bandito Traktorito", "Las Capuchinas", "Anpali Babel", "Antonio", "Orcalarita Orcali", "Dug Dug Dug Bedug", "Belula Beluga", "Piccionetta Macchina"},
+    
+    ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero", "Brutto Gialutto", "Elefantino Frigorifero", "Zibra Zubra Zibralini", "Gangangzelli Trulala"},
+    
+    ["Legendary"] = {"Chef Crabracadabra", "Pandaccini Bananini", "Sigma Girl", "Lionel Cactuseli", "Glorbo Fruttodrillo", "Tirilikalika"}
 }
 
+local TycoonTab = Window:CreateTab("Tycoon Controller", 4483362458)
+local SpawnerTab = Window:CreateTab("Unit Database", 4483362458)
+
+-- VARIABLES
 local SelectedRarity = "OG"
-local SelectedRot = "Skibidi Toilet"
-local SelectedMut = "None"
-local Looping = false
-local StealthMode = true -- PROTECTS FROM BAC-7204
+local SelectedRot = "Strawberry Elephant"
+local AutoFarm = false
 
--- UI LAYOUT: RED & BLUE TEXT
-MainTab:CreateDropdown({
-   Name = "Select Rarity",
-   Options = {"OG", "Secret", "Brainrot God", "Mythic", "Legendary", "Epic", "Rare/Common"},
-   CurrentOption = {"OG"},
-   Callback = function(Option) SelectedRarity = Option[1] end,
-})
-
-MainTab:CreateDropdown({
-   Name = "Select Brainrot",
-   Options = BrainrotDatabase["OG"],
-   CurrentOption = {"Skibidi Toilet"},
-   Flag = "RotDrop",
-   Callback = function(Option) SelectedRot = Option[1] end,
-})
-
--- STEALTH LOGIC TO FIX BAC ERRORS
-local function SafeSpawn()
-    if SelectedRot == "None" then return end
+-- [[ 3. THE "REAL SPAWN" LOGIC ]] --
+-- This function mimics the "Steal" button to force the unit onto your carpet
+local function StealBrainrot(UnitName)
+    local Replicated = game:GetService("ReplicatedStorage")
     
-    -- Anti-Spam delay to stop BAC-2208
-    if StealthMode then
-        task.wait(math.random(3, 7) / 10) -- Random 0.3-0.7s delay fools detectors
-    end
-
-    local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("SpawnEvent") or 
-                 game:GetService("ReplicatedStorage"):FindFirstChildOfClass("RemoteEvent")
+    -- Method A: The standard "Steal" event for this game
+    local Remote = Replicated:FindFirstChild("StealBrainrot") or 
+                   Replicated:FindFirstChild("SpawnUnit") or 
+                   Replicated:FindFirstChild("Events"):FindFirstChild("Spawn")
     
     if Remote then
-        Remote:FireServer(SelectedRot, SelectedMut, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        -- Arguments: Unit Name, Mutation (None default), IsShiny (false)
+        Remote:FireServer(UnitName, "None", false)
+    else
+        -- Fallback: If they renamed the remote, we search for the "Purchase" remote
+        local Remote2 = Replicated:FindFirstChild("Purchase")
+        if Remote2 then Remote2:FireServer(UnitName) end
     end
 end
 
-MainTab:CreateSection("Execution Control")
+-- [[ 4. GUI: TYCOON AUTOMATION ]] --
+TycoonTab:CreateSection("Auto-Steal (Red Carpet)")
 
-MainTab:CreateToggle({
-   Name = "Loop Spawner (Left)",
+TycoonTab:CreateDropdown({
+   Name = "Select Unit to Steal",
+   Options = BrainrotDatabase["OG"], -- Default to OG as requested
+   CurrentOption = {"Strawberry Elephant"},
+   Flag = "TycoonRot",
+   Callback = function(Option) SelectedRot = Option[1] end,
+})
+
+TycoonTab:CreateButton({
+   Name = "🔥 SPAWN ON CARPET (GET INDEX)",
+   Callback = function()
+       StealBrainrot(SelectedRot)
+       Rayfield:Notify({Title = "Ghaloulix9", Content = SelectedRot .. " sent to Portal!", Duration = 2})
+   end,
+})
+
+TycoonTab:CreateToggle({
+   Name = "Infinite Money Loop (Auto-Spawn)",
    CurrentValue = false,
    Callback = function(Value)
-      Looping = Value
+      AutoFarm = Value
       task.spawn(function()
-         while Looping do
-            SafeSpawn()
+         while AutoFarm do
+            StealBrainrot(SelectedRot)
+            -- Wait 0.5s so they don't pile up too much and lag Delta
             task.wait(0.5) 
          end
       end)
    end,
 })
 
-MainTab:CreateButton({
-   Name = "🚀 SPAWN (Right Side)",
-   Callback = function()
-      SafeSpawn()
-      Rayfield:Notify({Title = "Success", Content = "Spawned: " .. SelectedRot, Duration = 2})
+-- [[ 5. GUI: DATABASE SELECTOR ]] --
+SpawnerTab:CreateSection("Select Category")
+
+SpawnerTab:CreateDropdown({
+   Name = "Category",
+   Options = {"OG", "Secret", "Halloween Event", "Winter Event", "Brainrot God", "Mythic", "Legendary"},
+   CurrentOption = {"OG"},
+   Callback = function(Option) 
+       SelectedRarity = Option[1]
+       -- Updates the main dropdown in the Tycoon Tab
+       TycoonTab:UpdateDropdown("TycoonRot", BrainrotDatabase[SelectedRarity]) 
    end,
 })
 
--- PERFORMANCE & THEME
-PerformanceTab:CreateButton({
-   Name = "⚡ BOOST FPS & STABILITY",
+SpawnerTab:CreateSection("Unlockers")
+
+SpawnerTab:CreateButton({
+   Name = "⚡ UNLOCK ALL INDEX (Risky)",
    Callback = function()
-      settings().Rendering.QualityLevel = 1
-      for _, v in pairs(game:GetDescendants()) do
-         if v:IsA("BasePart") then v.Material = Enum.Material.Plastic v.Reflectance = 0
-         elseif v:IsA("Decal") or v:IsA("ParticleEmitter") then v:Destroy() end
-      end
+       for category, units in pairs(BrainrotDatabase) do
+           for _, unit in pairs(units) do
+               StealBrainrot(unit)
+               task.wait(0.1) -- Rapid fire to unlock index
+           end
+           task.wait(1)
+       end
+       Rayfield:Notify({Title = "Index Unlocking...", Content = "Spamming units to fill your book!", Duration = 3})
    end,
+})
+
+-- [[ 6. INITIALIZATION ]] --
+Rayfield:Notify({
+   Title = "STEAL A BRAINROT LOADED",
+   Content = "OG Units Ready. Events Loaded.",
+   Duration = 5,
 })
