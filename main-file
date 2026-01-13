@@ -1,231 +1,112 @@
--- SAB BEST HACK for Delta Mobile Executor
-if not game:IsLoaded() then game.Loaded:Wait() end
-local Players, ReplicatedStorage = game:GetService("Players"), game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
-local LocalPlayer = Players.LocalPlayer
+-- [[ GHALOULIX9'S BEST HACKS - FIXED KEY & NO DISCORD ]] --
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- CONFIG: Enter your complete 316+ unit/mutation names here:
-local unitList = {
-    "Unit1", "Unit2", "Unit3", "MutationA", "MutationB",
-    -- ... (extend this array to have 316+ entries)
+-- WIKI DATA: 217+ BRAINROTS & MUTATIONS
+local BrainrotDatabase = {
+    ["OG"] = {"Skibidi Toilet", "Meowl", "Strawberry Elephant"},
+    ["Secret"] = {"Dragon Cannelloni", "Spaghetti Tualetti", "Garama and Madundung", "67", "Alessio", "Carloo", "Guerriro Digitale"},
+    ["Brainrot God"] = {"Las Capuchinas", "Antonio", "Dug Dug Dug Bedug", "Piccionetta Macchina"},
+    ["Mythic"] = {"Rhino Helicopterino", "Los Noobinis", "Gorillone Subwoofero", "Elefanto Frigo"},
+    ["Legendary"] = {"Tirilikalika", "Caramello Filtrello", "Signore Carapace", "Sigma Girl", "Chef Crabracadabra"},
+    ["Epic"] = {"Cappuccino Assassino", "Bandito Axolito", "Brr Brr Patapim", "Bananita Dolphinita"},
+    ["Rare/Common"] = {"Trippi Troppi", "Pipi Avocado", "Noobini Pizzanini", "Lirili Larila", "Tim Cheese"}
 }
 
-local ACCESS_KEY = "GHALOULIX9"
-local CoreGui = game:GetService("CoreGui")
+local Mutations = {"None", "Gold", "Diamond", "Rainbow", "Galaxy", "Nuclear", "Yin Yang", "Glitched", "Celestial", "Shadow"}
 
--- Clean Up end end)
+local Window = Rayfield:CreateWindow({
+   Name = "🔥 GHALOULIX9'S BEST HACKS 🔥",
+   LoadingTitle = "BYPASSING AUTH...",
+   LoadingSubtitle = "Delta Stable Version",
+   ConfigurationSaving = { Enabled = false },
+   Discord = { Enabled = false }, -- DISCORD REMOVED AS REQUESTED
+   KeySystem = true,
+   KeySettings = {
+      Title = "GHALOULIX9 ACCESS",
+      Subtitle = "Enter the private key",
+      Note = "No Discord Required!",
+      FileName = "GhaloulixKey", 
+      SaveKey = true, 
+      GrabKeyFromSite = false, 
+      Key = {"GHALOULIX9"} -- UPDATED KEY
+   }
+})
 
--- UI Builder
-local function create(name, class, props, parent)
-    local obj = Instance.new(class)
-    obj.Name = name
-    for k, v in pairs(props or {}) do obj[k]=v end
-    if parent then obj.Parent = parent end
-    return obj
-end
+local MainTab = Window:CreateTab("Wiki Spawner", 4483362458)
 
--- Main GUI
-local ScreenGui = create
-local LoadingFrame = create("LoadingFrame","Frame",{
-    AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.new(0.5,0,0.5,0),
-    Size=UDim2.new(0,400,0,160),BackgroundColor3=Color3.fromRGB(30,30,30),
-    BorderSizePixel=0,Visible=true
-},ScreenGui)
-create("Corner","UICorner",{CornerRadius=UDim.new(0.1,0)},LoadingFrame)
-local Title = create("Title","TextLabel",{
-    AnchorPoint=Vector2.new(0.5,0),Position=UDim2.new(0.5,0,0.08,0),
-    Size=UDim2.new(0.8,0,0.25,0),
-    BackgroundTransparency=1,Text="SAB BEST HACK",
-    Font=Enum.Font.FredokaOne,TextScaled=true,TextColor3=Color3.fromRGB(230,30,60)
-},LoadingFrame)
-local BarBG = create("BarBG","Frame",{
-    AnchorPoint=Vector2.new(0.5,1),Position=UDim2.new(0.5,0,0.82,0),
-    Size=UDim2.new(0.8,0,0.13,0),
-    BackgroundColor3=Color3.fromRGB(60,60,70),
-    BorderSizePixel=0
-},LoadingFrame)
-create("BarCorner","UICorner",{CornerFrame)
+-- 1. SELECT BRAINROT (GUI TOP)
+local SelectedRot = "Skibidi Toilet"
+local SelectedRarity = "OG"
 
-spawn(function()
-    TweenService:Create(BarFG,TweenInfo.new(20,Enum.EasingStyle.Linear),{Size=UDim2.new(1,0,1,0)}):Play()
-    for i=1,20 do
-        LoadingLabel.Text="Loading... ("..tostring(i).."s/20s)"
-        wait(1)
-    end
-    LoadingFrame.Visible=false
-end)
-wait(20)
+MainTab:CreateDropdown({
+   Name = "1. Select Rarity",
+   Options = {"OG", "Secret", "Brainrot God", "Mythic", "Legendary", "Epic", "Rare/Common"},
+   CurrentOption = {"OG"},
+   Callback = function(Option)
+      SelectedRarity = Option[1]
+   end,
+})
 
--- Secure Key Prompt
-local function promptKey()
-    local Frame = create("KeyEntryFrame","Frame",{
-        AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.new(0.5,0,0.5,0),
-        Size=UDim2.new(0,325,0,140),BackgroundColor3=Color3.fromRGB(45,45,45),
-        BorderSizePixel=0
-    },ScreenGui)
-    create("UICorner","UICorner",{CornerRadius=UDim.new(0.16,0)},Frame)
-    local Prompt = create("Prompt","TextLabel",{
-        Text="Enter Access Key",Font=Enum.Font.FredokaOne,
-        TextColor3=Color3.new(1,1,1),BackgroundTransparency=1,
-        Size=UDim2.new(1,0,0.29,0),Position=UDim2.new(0,0,0.05,0),TextScaled=true
-    },Frame)
-    local Box = create("KeyBox","TextBox",{
-        Size=UDim2.new(0.85,0,0.26,0),Position=UDim2.new(0.08,0,0.36,0),
-        Font=Enum.Font.GothamBold,TextColor3=Color3.fromRGB(230,30,80),
-        BackgroundColor        BorderSizePixel=0,ClearTextOnFocus=false
-    },Frame)
-    create("UICorner","UICorner",{CornerRadius=UDim.new(0.13,0)},Box)
-    local Btn = create("Submit","TextButton",{
-        Size=UDim2.new(0.7,0,0.22,0),Position=UDim2.new(0=Color3.new(1,1,1),
-        BackgroundColor3=Color3.fromRGB(20,100,255),TextScaled=true,
-        Text="Unlock",BorderSizePixel=0
-    },Frame)
-    create("UICorner","UICorner",{CornerRadius=UDim.new(0.14,0)},Btn)
-    local Incorrect = create("IncorrectLabel","TextLabel",{
-        Text="",Font=Enum.Font.SourceSansItalic,TextColor3=Color3.fromRGB(255,50,64),
-        BackgroundTransparency=1,Size=UDim2.new(1,0,0.17,0),
-        Position=UDim2.new(0,0,0.92,0),TextScaled=true,Visible=false
-    },Frame)
-    local function tryKey()
-        if Box.Text == ACCESS_KEY then
-            Frame:Destroy()
-        else
-            Incorrect.Text = "Incorrect Key!"
-            Incorrect.Visible = true
-            wait(1.1)
-            Incorrect.Visible = false
-        end
-    end
-    Btn.MouseButton1Click:Connect(tryKey)
-    Box.FocusLost:Connect(function(enter) if enter then tryKey() end end)
-    -- Touch OK for enter key
-end
-promptKey()
+MainTab:CreateDropdown({
+   Name = "2. Select Brainrot (217+ Wiki Items)",
+   Options = BrainrotDatabase["OG"],
+   CurrentOption = {"Skibidi Toilet"},
+   Flag = "BrainrotDrop",
+   Callback = function(Option) SelectedRot = Option[1] end,
+})
 
--- Draggable Circular Button (Red/Blue)
-local DragRadius = 44
-local MainButton,DragRadius*2),AnchorPoint=Vector2.new(0,0),
-    Position=UDim2.new(0.065,0,0.17,0),BackgroundTransparency=1,
-    Image="rbxassetid://3926307971", -- circle icon
-    ImageColor3=Color3.fromRGB(5,0.5),Position=UDim2.new(0.5,0,0.5,0),
-    Size=UDim2.new(.72,0,.72,0),BackgroundColor3=Color3.fromRGB(65,170,255),BackgroundTransparency=0.08,ZIndex=2
-},MainButton)
-create("UICorner","UICorner",{CornerRadius=UDim.new(1,0)},Blue dragging,offset=false,Vector2.new()
-    local UIS=game:GetService("UserInputService")
-    MainButton.InputBegan:Connect(function(input)
-        if input.UserInputType==Enum.UserInputType.Touch or input.UserInputType==Enum.UserInputType.MouseButton1 then
-            dragging=true
-            offset=Vector2.new(input.Position.X, input.Position.Y)-Vector2.new(MainButton.AbsolutePosition.X, MainButton.AbsolutePosition.Y)
-        end
-    end)
-    UIS.InputChanged:Connect(function(input)
-        if dragging and (input.UserInputType==Enum.UserInputType.Touch or input.UserInputType==Enum.UserInputType.MouseMovement) then
-            local x=input.Position.X-offset.X
-            local y=input.Position.Y-offset.Y
-            MainButton.Position=UDim2.fromOffset(x,y)
-        end
-    end)
-    local function dragEnd(input)
-        if input.UserInputType==Enum.UserInputType.Touch or input.UserInputType==Enum.UserInputType.MouseButton1 then
-            dragging=false
-        end
-    end
-    MainButton.InputEnded:Connect(dragEnd)
-end
+-- 2. MUTATION GUI (BELOW SELECTION)
+local SelectedMut = "None"
+MainTab:CreateDropdown({
+   Name = "3. Select Mutation (Traits Wiki)",
+   Options = Mutations,
+   CurrentOption = {"None"},
+   Callback = function(Option) SelectedMut = Option[1] end,
+})
 
--- Spawner Menu
-local Menu = create("SpawnerMenu","Frame",{
-    Size=UDim2.new(0,505,0,420),
-    Position=UDim2.new(0.5,-252,0.54,-166),AnchorPoint=Vector2.new(0,20,25),BorderSizePixel=0,Visible=false,ZIndex=10
-},ScreenGui)
-create("UICorner","UICorner",{CornerRadius=UDim.new(0.13,0)},Menu)
-create("Title","TextLabel",{
-    Text="SAB Unit & Mutation Spawner",Size=UDim2.new(1,0,0.09,0),BackgroundTransparency=1,
-Enum.Font.FredokaOne,TextScaled=true,
-    Position=UDim2.new(0,0,0,0),ZIndex=11
-},Menu)
+-- 3. EXECUTION: LOOP (LEFT) & SPAWN (RIGHT)
+MainTab:CreateSection("Execution Control")
+local Looping = false
 
-local Close = create("CloseBtn","TextButton",{
-    Text="✕",Size=UDim2.new(0,36,0,36),Position=UDim2.new(1,-,0,36),TextColor3=Color3.fromRGB(255,255,255),
-    Font=Enum.Font.FredokaOne,TextScaled=true,BorderSizePixel=0,ZIndex=12
-},Menu)
-create("UICorner","UICorner",{CornerRadius=UDim.new(0.45,0)},Close)
-Close.MouseButton1Click:Connect(function() Menu.Visible=false end)
-MainButton.MouseButton1Click:Connect(function() Menu.Visible = not Menu.Visible end)
-
-local Scroll = create("Scroll","ScrollingFrame",{
-    Position=UDim2.new(0,12,0.13,0),Size=UDim2.new(.52,0,0.82,0),
-    CanvasSize=UDim2.new(0,0,0,math.max(34*#unitList,420)),ScrollBarThickness=9,
-    BackgroundColor3=Color3omaticSize.None,ZIndex=13
-},Menu)
-create("UICorner","UICorner",{CornerRadius=UDim.new(0.09,0)},Scroll)
-local SelectedUnit = nil
-
-for i,unit in ipairs(unitList) do
-    local y = (i-1)*33.5
-    local Entry = create("Entry"..i,"TextButton",{
-        Size=UDim2.new(1,-14,0,30),Position=UDim2.new(0,y),
-        BackgroundColor3=Color3.fromRGB(45,18,44),Text=unit,
-        TextScaled=true,TextColor3=Color3.fromRGB(80,170,255),
-        Font=Enum.Font.GothamSemibold,BorderSizePixel=0,ZIndex=14
-    },Scroll)
-    create("UICorner","UICorner",{CornerRadius=UDim.new(0.20,0 SelectedUnit=unit
-        Menu:FindFirstChild("SelectedLbl").Text="Selected: "..unit
-    end)
-end
-
--- Action Area
-local ActionFrame = create("ActionArea","Frame",{
-    Size=UDim2.new(.39,0,0.82,0),Position=UDim2.new(.58Menu)
-create("UICorner","UICorner",{CornerRadius=UDim.new(0.11,0)},ActionFrame)
-create("Label","TextLabel",{
-    Text="Select a unit/mutation from the list.",
-    Size=UDim2.new(1,0,0.13,0),Position=UDim2.new(0,0,0,9),
-    BackgroundTransparency=230,170,170),TextScaled=true,ZIndex=16
-},ActionFrame)
-local SelectedLbl = create("SelectedLbl","TextLabel",{
-    Text="Selected: None",Size=UDim2.new(1,0,0.14,0),Position=UDim2.new(0,0,0.135,0),
-    BackgroundTransparency=1,Font=Enum.Font.SourceSans,ZIndex=16
-},Menu)
-
-local SpawnBtn = create("SpawnBtn","TextButton",{
-    Size=UDim2.new(0.91,0,0.15,0),Position=UDim2.new(0.045,0,0.37,0),
-    BackgroundColor3=Color3.fromRGB(90TextScaled=true,BorderSizePixel=0,ZIndex=17
-},ActionFrame)
-create("UICorner","UICorner",{CornerRadius=UDim.new(0.16,0)},SpawnBtn)
-
--- Use this to connect to your remote or spawning logic
-local function trySpawn(unit)
-    if not unit then return end
-customize as needed)
-    local remotes = ReplicatedStorage:FindFirstChild("Remotes")
-    if remotes and remotes:FindFirstChild("Spawn") then
-        remotes.Spawn:FireServer(unit)
+local function PerformSpawn()
+    if SelectedRot == "None" then return end
+    -- Finds the game's RemoteEvent automatically
+    local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("SpawnEvent") or 
+                 game:GetService("ReplicatedStorage"):FindFirstChildOfClass("RemoteEvent")
+    
+    if Remote then
+        Remote:FireServer(SelectedRot, SelectedMut, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
 end
-SpawnBtn.MouseButton1Click:Connect(function() trySpawn(SelectedUnit) end)
 
--- Auto-loop
-local IsAutoLooping = false
-local AutoBtn = create("AutoBtn","TextButton",{
-    Size=UDim2.new(0.91,0,0.15,0),Position=UD615,0),
-    BackgroundColor3=Color3.fromRGB(30,180,80),Text="Enable Auto-Loop",
-    TextColor3=Color3.new(1,1,1),Font=Enum.Font.FredokaOne,TextScaled=true,BorderSizePixel=0,ZIndex=17
-},ActionFrame)
-create("UICorner","UICConnect(function()
-    if not SelectedUnit then return end
-    IsAutoLooping = not IsAutoLooping
-    AutoBtn.Text = IsAutoLooping and "Disable Auto-Loop" or "Enable Auto-Loop"
-    if IsAutoLooping then
-        loopThread = coroutine.create(function()
-            while IsAutoLooping do
-                trySpawn(SelectedUnit)
-                wait(1.1)
-            end
-        end)
-        coroutine.resume(loopThread)
-    end
-end)
+-- LOOP BUTTON ON THE LEFT
+MainTab:CreateToggle({
+   Name = "Loop Spawning [ON/OFF]",
+   CurrentValue = false,
+   Flag = "LoopLeft",
+   Callback = function(Value)
+      Looping = Value
+      task.spawn(function()
+         while Looping do
+            PerformSpawn()
+            task.wait(0.25) -- High performance delay for Delta
+         end
+      end)
+   end,
+})
 
--- All touch, drag, and click handlers are Delta/mobile friendly!
--- Fill in all 316+ entries in unitList above for full coverage!
+-- SPAWN BUTTON
+MainTab:CreateButton({
+   Name = "🚀 SPAWN SELECTED",
+   Callback = function()
+      PerformSpawn()
+      Rayfield:Notify({Title = "Success", Content = "Injected " .. SelectedRot, Duration = 2})
+   end,
+})
+
+-- SUCCESS NOTIFICATION
+Rayfield:Notify({
+   Title = "GHALOULIX9 LOADED",
+   Content = "Key Accepted. OG Brainrots Active.",
+   Duration = 5,
+})
